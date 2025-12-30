@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Lottery Slot Machine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Oswald:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#020617,#000);
+  font-family:Montserrat;
+  color:#fff;
+}
+
+/* APP */
+.app{
+  max-width:1200px;
+  margin:10px auto;
+  border:10px solid #facc15;
+  background:#000;
+}
+
+/* TOP TITLE */
+.top{
+  font-size:54px;
+  text-align:center;
+  padding:14px;
+  background:linear-gradient(270deg,#00ffcc,#ffee00,#ff9900,#00ffcc);
+  background-size:600% 600%;
+  animation:topGlow 18s linear infinite;
+  text-shadow:3px 3px 0 #000;
+}
+@keyframes topGlow{
+  from{background-position:0%}
+  to{background-position:100%}
+}
+
+/* SUB TITLE */
+.sub{
+  font-size:34px;
+  text-align:center;
+  padding:12px;
+  animation:subColors 12s linear infinite;
+}
+@keyframes subColors{
+  0%{background:#020617}
+  25%{background:#5A0F14}
+  50%{background:#003F5C}
+  75%{background:#8B0000}
+  100%{background:#4B0082}
+}
+
+/* STAGE */
+.stage{
+  position:relative;
+  padding:30px 90px;
+  background:linear-gradient(180deg,#d1d5db,#f8fafc);
+}
+
+/* RIBBONS */
+.ribbon{
+  position:absolute;
+  top:0; bottom:0;
+  width:75px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  font-weight:900;
+  writing-mode:vertical-rl;
+  text-shadow:2px 2px #000;
+}
+.left{
+  left:0;
+  animation:leftRibbon 14s linear infinite;
+}
+.right{
+  right:0;
+  animation:rightRibbon 14s linear infinite;
+}
+@keyframes leftRibbon{
+  0%{background:#0B3C5D}
+  20%{background:#0B5D1E}
+  40%{background:#8B0000}
+  60%{background:#00CEC8}
+  100%{background:#0B3C5D}
+}
+@keyframes rightRibbon{
+  0%{background:#C9A227}
+  20%{background:#4B0082}
+  40%{background:#014D4E}
+  60%{background:#2F3E46}
+  80%{background:#E30B5D}
+  100%{background:#00008B}
+}
+
+/* FRAME */
+.frame{
+  display:flex;
+  gap:16px;
+  padding:25px;
+  background:linear-gradient(180deg,#9ca3af,#e5e7eb);
+  border:8px solid #374151;
+  box-shadow:inset 0 0 25px rgba(0,0,0,.6);
+  overflow:hidden;
+}
+
+/* SLOT */
+.slot{
+  width:110px;
+  height:190px;
+  background:linear-gradient(180deg,#111,#666);
+  border:6px solid #000;
+  overflow:hidden;
+  position:relative;
+}
+.slot::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25),transparent 70%);
+}
+
+/* REEL */
+.reel{
+  position:absolute;
+  top:0;
+}
+.reel div{
+  height:190px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  color:#000;
+  font-family:Oswald;
+  font-size:96px;
+  border-bottom:2px solid #ccc;
+}
+
+/* RESULT FLASH */
+.flash{
+  animation:flashGold .4s alternate infinite;
+}
+@keyframes flashGold{
+  from{box-shadow:inset 0 0 10px gold}
+  to{box-shadow:inset 0 0 40px gold}
+}
+
+/* INFO */
+.info{
+  background:#facc15;
+  color:#000;
+  display:flex;
+  justify-content:space-between;
+  font-size:26px;
+  padding:14px;
+  font-weight:900;
+}
+#venue{
+  animation:liveBlink 2s ease-in-out infinite;
+}
+@keyframes liveBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.4}
+}
+
+/* ADMIN */
+.admin{
+  background:#020617;
+  padding:20px;
+  border-top:6px solid #facc15;
+}
+.admin h3{
+  margin:0 0 10px;
+  color:#facc15;
+}
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.controls input,
+.controls button{
+  padding:12px;
+  font-size:18px;
+}
+
+/* CONFETTI */
+.confetti{
+  position:absolute;
+  width:12px;
+  height:12px;
+  animation:fall 3.5s linear forwards;
+}
+.circle{border-radius:50%}
+.star{
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+}
+@keyframes fall{
+  to{transform:translateY(300px) rotate(720deg)}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<div class="top" id="topText">AMERICAN ONLINE LOTTERY</div>
+<div class="sub" id="subText">LION KING – DAILY DRAW</div>
+
+<div class="stage">
+  <div class="ribbon left" id="leftRibbon">LION KING</div>
+  <div class="ribbon right" id="rightRibbon">OFFICIAL</div>
+  <div class="frame" id="frame"></div>
+</div>
+
+<div class="info">
+  <div>Date: <span id="date"></span></div>
+  <div>Time: <span id="time"></span></div>
+  <div id="venue">LIVE DRAW</div>
+</div>
+
+<div class="admin">
+<h3>ADVANCED ADMIN CONTROLS</h3>
+<div class="controls">
+  <input id="force" placeholder="Force Result (5 digits)">
+  <button onclick="spin()">SPIN</button>
+  <button onclick="spinRandom()">RANDOM</button>
+  <label>Spin Speed</label><input type="range" id="speed" min="60" max="140" value="90">
+  <label>Stop Delay</label><input type="range" id="delay" min="300" max="800" value="500">
+  <label>Sound</label><input type="range" id="volume" min="0" max="1" step="0.05" value="0.7">
+  <label>Confetti</label><input type="range" id="confettiAmount" min="30" max="150" value="80">
+  <input oninput="topText.textContent=this.value" placeholder="Top Title">
+  <input oninput="subText.textContent=this.value" placeholder="Sub Title">
+  <input oninput="leftRibbon.textContent=this.value" placeholder="Left Ribbon">
+  <input oninput="rightRibbon.textContent=this.value" placeholder="Right Ribbon">
+  <input oninput="venue.textContent=this.value" placeholder="Venue">
+  <input oninput="date.textContent=this.value" placeholder="Date">
+  <input oninput="time.textContent=this.value" placeholder="Time">
+</div>
+</div>
+</div>
+
+<script>
+const frame=document.getElementById('frame');
+const reels=[];
+const slots=5;
+const audioCtx=new AudioContext();
+
+for(let i=0;i<slots;i++){
+  const slot=document.createElement('div');
+  slot.className='slot';
+  const reel=document.createElement('div');
+  reel.className='reel';
+  for(let d=0;d<10;d++){
+    const n=document.createElement('div');
+    n.textContent=d;
+    reel.appendChild(n);
+  }
+  slot.appendChild(reel);
+  frame.appendChild(slot);
+  reels.push(reel);
+}
+
+/* SOUNDS */
+function rollSound(){
+  const o=audioCtx.createOscillator();
+  const g=audioCtx.createGain();
+  o.type='triangle';
+  o.frequency.setValueAtTime(160,audioCtx.currentTime);
+  g.gain.value=volume.value*0.03;
+  o.connect(g).connect(audioCtx.destination);
+  o.start();
+  setTimeout(()=>o.stop(),60);
+}
+function stopClick(){
+  const o=audioCtx.createOscillator();
+  const g=audioCtx.createGain();
+  o.type='square';
+  o.frequency.value=280;
+  g.gain.value=volume.value*0.06;
+  o.connect(g).connect(audioCtx.destination);
+  o.start();
+  setTimeout(()=>o.stop(),50);
+}
+
+/* ANNOUNCE */
+function announce(num){
+  const u=new SpeechSynthesisUtterance(
+    "The winning result is " + num.split('').join(' ')
+  );
+  u.voice=speechSynthesis.getVoices().find(v=>v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) || null;
+  u.rate=0.9;
+  u.pitch=1;
+  speechSynthesis.speak(u);
+}
+
+/* CONFETTI */
+function celebrate(){
+  frame.classList.add('flash');
+  for(let i=0;i<confettiAmount.value;i++){
+    const c=document.createElement('div');
+    c.className='confetti ' + (Math.random()>.5?'circle':'star');
+    c.style.left=Math.random()*100+'%';
+    c.style.top='0';
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    frame.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+  setTimeout(()=>frame.classList.remove('flash'),2000);
+}
+
+/* SPIN */
+function spinWithResult(result){
+  reels.forEach((r,i)=>{
+    let pos=0;
+    const run=setInterval(()=>{
+      pos=(pos+1)%10;
+      r.style.transform=`translateY(${pos*190}px)`;
+      rollSound();
+    },speed.value);
+
+    setTimeout(()=>{
+      clearInterval(run);
+      r.style.transform=`translateY(${result[i]*190}px)`;
+      stopClick();
+      if(i===reels.length-1){
+        celebrate();
+        announce(result);
+      }
+    },1000+i*delay.value);
+  });
+}
+
+function random(){
+  return Math.floor(Math.random()*100000).toString().padStart(5,'0');
+}
+function spin(){
+  const v=force.value;
+  spinWithResult(/^\d{5}$/.test(v)?v:random());
+}
+function spinRandom(){spinWithResult(random())}
+
+date.textContent=new Date().toLocaleDateString();
+time.textContent=new Date().toLocaleTimeString();
+</script>
+</body>
+  </html>
